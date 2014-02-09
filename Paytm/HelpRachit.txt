@@ -1,0 +1,125 @@
+//PAYTM Contest - 09 Feb - 2014 - Help Rachit
+
+// url - http://www.hackerearth.com/paytm-codejam/algorithm/help-rachit-2/
+
+
+
+/* IMPORTANT: class must not be public. */
+
+/*
+ * uncomment this if you want to read input. */
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+
+class TestClass {
+    public static void main(String args[] ) throws Exception {
+        InputStreamReader isr=new InputStreamReader(System.in);
+        BufferedReader br=new BufferedReader(isr);
+		String line;		
+		int a1[]=new int[20];
+		int p=0,m=1;
+		double factor = 1e6; // = 1 * 10^5 = 100000.
+
+
+ 		while((line=br.readLine())!=null)
+		{
+			a1[p]=Integer.parseInt(line);
+		//	System.out.println(a1[p]);
+			p++;
+			
+        }
+
+
+	int test= a1[0];
+	while(test!=0)
+	{
+		int n=a1[m];	
+        int [][]a=new int [n][n];
+		int z=0;
+		double ans;
+		int res;
+		int dia[]=new int[100];
+		int p_count=0; 
+		boolean flag=true;
+        if(n%2==0)
+        {
+            int t=n,c=n*n,i=0,j;
+        
+            while(c>=1)
+        {
+            for(j=i;j<t;j++)
+                a[i][j]=c--;
+            for(j=i+1;j<t;j++)
+                a[j][t-1]=c--;
+            for(j=t-2;j>=i;j--)
+                a[t-1][j]=c--;
+            for(j=t-2;j>i;j--)
+                a[j][i]=c--;
+            i++;
+            t--;
+        }
+    }
+    else
+    {
+        
+        int t=n,c=n*n,i=0,j;
+        
+            while(c>=1)
+        {
+            for(j=t-1;j>=i;j--)
+                a[t-1][j]=c--;
+            for(j=t-2;j>i;j--)
+                a[j][i]=c--;
+            for(j=i;j<t;j++)
+                a[i][j]=c--;
+            for(j=i+1;j<t-1;j++)
+                a[j][t-1]=c--;
+            
+            
+            i++;
+            t--;
+        }
+        a[n/2][n/2]=1;
+    }
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<n;j++)
+				{
+					if ( i==j)
+					{
+               			dia[z]=a[i][j];
+						z=z+1;
+						dia[z]=a[i][n-1-i];
+						z=z+1;
+					}
+  				}
+			}
+
+for (int j=0;j<z-1;j++)
+{
+for(int i=2;i<=dia[j]/2;i++)
+		{
+			res=dia[j]%i;
+			if(res==0)
+			{
+				flag=false;
+				break;
+			}
+		}
+		if(flag)
+			p_count=p_count+1;
+}
+
+ans=((double)p_count/(double)(z-1))*100; 
+double result = Math.round(ans * factor) / factor;
+
+
+System.out.println(result);
+test--;
+m++;
+} 
+    }
+}
